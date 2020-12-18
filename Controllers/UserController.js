@@ -27,8 +27,9 @@ exports.addUser = async (req, res, next) => {
 };
 exports.getPosts = async (req, res, next) => {
   try {
-    const { id } = req.body;
-    const posts = await User.findOne(id).select({ dairy: 1 });
+    const { _id } = req.body;
+    //console.log('token', req.body);
+    const posts = await User.findById(_id).select({ dairy: 1 });
     res.status(200).json({
       status: 'success',
       posts,
@@ -84,6 +85,7 @@ exports.editPosts = async (req, res, next) => {
 exports.deletePosts = async (req, res, next) => {
   try {
     const { _id: id, dairy_id } = req.body;
+    console.log(req.body);
     const deleted = await User.findByIdAndUpdate(id, {
       $pull: { dairy: { _id: dairy_id } },
     });
