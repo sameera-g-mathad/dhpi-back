@@ -15,7 +15,6 @@ const UserSchema = new mongoose.Schema({
       description: String,
       time: {
         type: Date,
-        default: new Date(),
       },
     },
   ],
